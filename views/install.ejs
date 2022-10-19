@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href="/stylesheets/style.css"/>
+    <link rel='stylesheet' href="/stylesheets/font_awesome.min.css"/>
+    <script src="/javascripts/socket.io-1.4.5.js"></script>
+    <script src="/javascripts/jquery-2.2.4.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form method="post" action="install">
+        <div class="form-group">
+            <label for="adminPassword">Admin Password</label>
+            <input name="adminPassword" type="text" class="form-control" id="adminPassword">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>

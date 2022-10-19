@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href="/stylesheets/style.css"/>
+    <link rel='stylesheet' href="/stylesheets/font_awesome.min.css"/>
+    <script src="/javascripts/socket.io-1.4.5.js"></script>
+    <script src="/javascripts/jquery-2.2.4.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="/"><i class="fas fa-users"></i> REF</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="display">Display</a></li>
+                <li class="nav-item"><a class="nav-link" href="weight">Weight</a></li>
+                <li class="nav-item"><a class="nav-link" href="break">Break</a></li>
+                <li class="nav-item"><a class="nav-link" href="remote">Remote Controller</a></li>
+                <li class="nav-item"><a class="nav-link" href="settings">Settings</a></li>
+            </ul>
+            <span class="navbar-text" id="ip-address">
+                Connecting ...
+            </span>
+        </div>
+    </nav>
+</div>
+<script>
+    let socket = io();
+
+    socket.on("connect", function () {
+        socket.emit('client.new', { "view": "Index", "path": "/"});
+    });
+
+    socket.on("client.path", function (path) {
+        window.location = path;
+    });
+
+    function getIp() {
+      $.get("ip", function( data ) {
+        if (data.ip) {
+          $("#ip-address").html(data.ip);
+        } else {
+          setTimeout(getIp, 1000);
+        }
+      });
+    }
+    getIp();
+</script>
+</body>
+</html>

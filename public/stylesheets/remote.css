@@ -1,0 +1,36 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    padding-top: 70px;
+}
+
+.remote-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.item {
+    flex: 1 100%;
+}
+
+.item.btn-group {
+    margin-top: 5px;
+}
+
+.item.btn-group .btn {
+    width: 50%;
+    height: 100%;
+}
+
+.page-header {
+    margin-top: 0;
+}
+
+.icon.fas {
+    font-size:50px;
+}

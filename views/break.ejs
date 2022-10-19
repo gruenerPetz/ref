@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href="/stylesheets/style.css"/>
+    <link rel='stylesheet' href="/stylesheets/break.css"/>
+    <script src="/javascripts/socket.io-1.4.5.js"></script>
+    <script src="/javascripts/jquery-2.2.4.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="break" class="text-center">
+    <h1>Pause</h1>
+    <time id="time"><%= formatTime(time) %></time>
+</div>
+
+<script>
+    var socket = io();
+    var interval;
+
+    socket.on("connect", function() {
+        socket.emit('client.new', {"view": "Break", "path": "/break"});
+    });
+
+    socket.on("client.path", function (path) {
+        window.location = path;
+    });
+
+    socket.on("time.start", function (data) {
+        var time = data;
+        clearInterval(interval);
+        $("#time").html(formatTime(time));
+        interval = setInterval(function () {
+            $("#time").html(formatTime(--time));
+            if (time == 0) {
+                clearInterval(interval);
+            }
+        }, 1000);
+    });
+    socket.on("time.reset", function (data) {
+        clearInterval(interval);
+        $("#time").html(formatTime(data));
+    });
+
+    function formatTime(time) {
+        var sec_num = parseInt(time, 10);
+        var hours   = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+
+        return minutes+':'+seconds;
+    }
+</script>
+</body>
+</html>

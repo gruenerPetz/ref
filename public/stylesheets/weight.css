@@ -1,0 +1,123 @@
+* {
+    cursor: none;
+}
+
+body {
+    padding: 25px;
+}
+
+#time, #weight, #attempt {
+    font-size: 120px;
+}
+
+.panel-heading {
+    text-align: center;
+    font-size: 40px;
+}
+
+.panel-body {
+    text-align: center;
+    font-size: 70px;
+}
+
+.table th,
+.table td  {
+    text-align: center;
+    font-size: 30px;
+}
+
+.disc {
+    position: relative;
+    float: left;
+    width: 90px;
+    height: 500px;
+    margin-right: 7px;
+    text-align: center;
+    line-height: 500px;
+    font-size: 55px;
+}
+
+.collar {
+    position: relative;
+    float: left;
+    width: 60px;
+    height: 60px;
+    top: 220px;
+    background-color: #000000;
+}
+
+.bar {
+    position: relative;
+    float: left;
+    width: 100px;
+    height: 30px;
+    top: 235px;
+    background-color: #000000;
+}
+
+.value-5000 {
+    background-color: #3c763d;
+    width: 120px;
+}
+
+.value-2500 {
+    background-color: #ff0000;
+}
+
+.value-2000 {
+    background-color: #00497f;
+    height: 500px;
+    color: #ffffff;
+}
+
+.value-1500 {
+    background-color: #d9dc00;
+    height: 500px;
+}
+
+.value-1000 {
+    background-color: #007724;
+    height: 450px;
+    top: 25px;
+    line-height: 450px;
+    color: #ffffff;
+}
+
+.value-500 {
+    background-color: #dddddd;
+    height: 350px;
+    top: 75px;
+    line-height: 350px;
+}
+
+.value-250 {
+    background-color: #000000;
+    height: 300px;
+    top: 100px;
+    line-height: 300px;
+    color: #ffffff;
+}
+
+.value-125 {
+    background-color: #c4c4c4;
+    height: 250px;
+    top: 125px;
+    line-height: 250px;
+    font-size: 40px;
+}
+
+.value-50 {
+    background-color: #c4c4c4;
+    height: 200px;
+    top: 150px;
+    line-height: 200px;
+    font-size: 40px;
+}
+
+.value-25 {
+    background-color: #c4c4c4;
+    height: 200px;
+    top: 150px;
+    line-height: 200px;
+    font-size: 40px;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="refApp" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href="/stylesheets/style.css"/>
+    <link rel='stylesheet' href="/stylesheets/remote.css"/>
+    <link rel='stylesheet' href="/stylesheets/font_awesome.min.css"/>
+    <script src="/javascripts/socket.io-1.4.5.js"></script>
+    <script src="/javascripts/jquery-2.2.4.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/angular-locale_de-de.js"></script>
+    <script src="/javascripts/socket.min.js"></script>
+    <script src="/javascripts/controller/remote.js"></script>
+    <script type='text/javascript'>
+        const remoteController = <%- JSON.stringify(remoteController); %>;
+    </script>
+</head>
+<body ng-controller="RemoteController as remoteController">
+<div class="remote-wrapper">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">{{remoteController.title}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="remote">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <button type="button" class="item btn {{button.buttonClass}} btn-block" ng-repeat="button in remoteController.buttons" ng-click="sendCode(remoteController, button)">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" ng-show="button.status == 'loading'"></span>
+        <span ng-show="button.status == 'success'"><i class="icon fas fa-check"></i></span>
+        <span ng-show="button.status == 'error'"><i class="icon fas fa-exclamation-circle"></i></span>
+        <span ng-show="button.status == 'ready'">{{button.buttonText}}</span>
+    </button>
+    <div class="item btn-group" ng-show="remoteController.optionButtons.length">
+        <button type="button" class="btn {{button.buttonClass}}" ng-repeat="button in remoteController.optionButtons" ng-click="sendCode(remoteController, button)">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" ng-show="button.status == 'loading'"></span>
+            <span ng-show="button.status == 'success'"><i class="icon fas fa-check"></i></span>
+            <span ng-show="button.status == 'error'"><i class="icon fas fa-exclamation-circle"></i></span>
+            <span ng-show="button.status == 'ready'">{{button.buttonText}}</span>
+        </button>
+    </div>
+</div>
+</body>
+</html>

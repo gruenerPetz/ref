@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="refApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href="/stylesheets/style.css"/>
+    <link rel='stylesheet' href="/stylesheets/display.css"/>
+    <script src="/javascripts/socket.io-1.4.5.js"></script>
+    <script src="/javascripts/jquery-2.2.4.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/angular-locale_de-de.js"></script>
+    <script src="/javascripts/socket.min.js"></script>
+    <script src="/javascripts/controller/display.js"></script>
+</head>
+<body>
+<div class="container-fluid" ng-controller="DisplayController as display">
+    <div class="row" style="border-bottom:1px solid #333333;margin-bottom:50px;">
+        <div class="col">
+            <div class="panel-heading">Versuch</div>
+            <div class="panel-body"><span id="attempt" ng-bind="attempt"></span></div>
+        </div>
+        <div class="col">
+            <div class="panel-heading">Gewicht</div>
+            <div class="panel-body"><span id="weight" ng-bind="weight | number"></span> kg</div>
+        </div>
+        <div class="col">
+            <div class="panel-heading">Zeit</div>
+            <div class="panel-body"><time id="time" ng-bind="time"></time></div>
+        </div>
+    </div>
+    <div class="row panel-result" ng-class="{'show-result':showResult}">
+        <div class="col-md-4" ng-repeat="controller in remoteController">
+            <div class="result"
+                 ng-class="{
+                    'valid': controller.valid === true,
+                    'invalid': controller.valid === false,
+                    'received': controller.received
+                 }"
+            ></div>
+            <div class="row" style="padding-top: 50px;height:100px;">
+                <div class="col-md-4" ng-repeat="button in controller.buttons" ng-if="button.code > 10 && button.code < 50">
+                    <div class="reason {{button.id}}" ng-class="{'active': button.active}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark fixed-bottom">
+        <span class="navbar-text">IP Address: <span id="ip-address"></span></span>
+    </nav>
+</div>
+<script>
+  let socket = io();
+
+  socket.on("connect", function () {
+    socket.emit('client.new', { "view": "Index", "path": "/"});
+  });
+
+  socket.on("client.path", function (path) {
+    window.location = path;
+  });
+
+  function getIp() {
+    $.get("ip", function( data ) {
+      if (data.ip) {
+        $("#ip-address").html(data.ip);
+      } else {
+        setTimeout(getIp, 1000);
+      }
+    });
+  }
+  getIp();
+</script>
+</body>
+</html>

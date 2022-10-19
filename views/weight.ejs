@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="refApp" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href="/stylesheets/style.css"/>
+    <link rel='stylesheet' href="/stylesheets/weight.css"/>
+    <script src="/javascripts/socket.io-1.4.5.js"></script>
+    <script src="/javascripts/jquery-2.2.4.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/angular-locale_de-de.js"></script>
+    <script src="/javascripts/socket.min.js"></script>
+    <script src="/javascripts/controller/weight.js"></script>
+</head>
+<body>
+<div class="container-fluid" ng-controller="WeightController as weight">
+    <div class="row" style="border-bottom:1px solid #333333;margin-bottom:50px;">
+        <div class="col">
+            <div class="panel-heading">Versuch</div>
+            <div class="panel-body"><span id="attempt" ng-bind="attempt"></span></div>
+        </div>
+        <div class="col">
+            <div class="panel-heading">Gewicht</div>
+            <div class="panel-body"><span id="weight" ng-bind="weight | number"></span> kg</div>
+        </div>
+        <div class="col">
+            <div class="panel-heading">Zeit</div>
+            <div class="panel-body">
+                <time id="time" ng-bind="time"></time>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Disc</th>
+                    <th>Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="disc in discs" ng-if="disc.count > 0">
+                        <td ng-bind="disc.weight"></td>
+                        <td ng-bind="disc.count"></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <div id="discs" ng-show="!weightError">
+                <div class="disc-group" ng-repeat="disc in discs">
+                    <div class="disc value-{{disc.weight * 100}}" ng-repeat="i in getNumber(disc.count)">
+                        <span ng-bind="disc.weight"></span>
+                    </div>
+                </div>
+                <div class="collar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-show="weightError">
+                Gewicht kann nicht gesteckt werden
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
