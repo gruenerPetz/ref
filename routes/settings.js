@@ -8,25 +8,37 @@ const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const db = low(new FileSync('db.json'));
 
-async function comparePassword(dbPassword, password) {
-    return await bcrypt.compare(password, dbPassword);
-}
-
-router.get("/", function (req, res, next) {
-    let user = auth(req);
-
+function checkUser(req) {
     const settings = db.get('settings').find({
         id: "adminPassword"
     }).value();
 
     const admins = {admin: {password: settings.value}};
 
-    if (!user || !admins[user.name] || !comparePassword(admins[user.name].password, user.pass)) {
+    return new Promise((resolve, reject) => {
+        let user = auth(req);
+
+        if (user && admins[user.name]) {
+            bcrypt.compare(user.pass, admins[user.name].password).then((result) => {
+                if (result) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            })
+        } else {
+            reject();
+        }
+    });
+}
+
+router.get("/", function (req, res, next) {
+    checkUser(req).then(() => {
+        res.render("settings");
+    }).catch(() => {
         res.set('WWW-Authenticate', 'Basic realm="example"');
         return res.status(401).send()
-    }
-
-    res.render("settings");
+    });
 });
 
 router.put("/remoteController/:remoteControllerId", function (req, res, next) {
