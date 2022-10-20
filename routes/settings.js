@@ -9,7 +9,7 @@ const FileSync = require('lowdb/adapters/FileSync');
 const db = low(new FileSync('db.json'));
 
 async function comparePassword(dbPassword, password) {
-    return await bcrypt.compare(password, user.passwordHash);
+    return await bcrypt.compare(password, dbPassword);
 }
 
 router.get("/", function (req, res, next) {

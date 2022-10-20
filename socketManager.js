@@ -26,30 +26,34 @@ db.defaults({
         10: {
           id: "white",
           code: 10,
-          buttonClass: "btn-default",
+          buttonClass: "btn-light",
           buttonText: "White",
-          active: false
+          active: false,
+          status: "ready"
         },
         20: {
           id: "red",
           code: 20,
           buttonClass: "btn-danger",
           buttonText: "Red",
-          active: false
+          active: false,
+          status: "ready"
         },
         30: {
           id: "blue",
           code: 30,
           buttonClass: "btn-primary",
           buttonText: "Blue",
-          active: false
+          active: false,
+          status: "ready"
         },
         40: {
           id: "yellow",
           code: 40,
           buttonClass: "btn-warning",
           buttonText: "Yellow",
-          active: false
+          active: false,
+          status: "ready"
         }
       },
       optionButtons: []
@@ -64,42 +68,48 @@ db.defaults({
         10: {
           id: "white",
           code: 10,
-          buttonClass: "btn-default",
+          buttonClass: "btn-light",
           buttonText: "White",
-          active: false
+          active: false,
+          status: "ready"
         },
         20: {
           id: "red",
           code: 20,
           buttonClass: "btn-danger",
           buttonText: "Red",
-          active: false
+          active: false,
+          status: "ready"
         },
         30: {
           id: "blue",
           code: 30,
           buttonClass: "btn-primary",
           buttonText: "Blue",
-          active: false
+          active: false,
+          status: "ready"
         },
         40: {
           id: "yellow",
           code: 40,
           buttonClass: "btn-warning",
           buttonText: "Yellow",
-          active: false
+          active: false,
+          status: "ready"
         }
       },
       optionButtons: [{
         id: "reset",
         code: 50,
-        buttonClass: "btn-default",
-        buttonText: "RESET"
+        buttonClass: "btn-light",
+        buttonText: "RESET",
+        status: "ready"
       }, {
         id: "start",
         code: 60,
-        buttonClass: "btn-default",
-        buttonText: "START"
+        buttonClass: "btn-light",
+        buttonText: "START",
+        status: "ready"
       }]
     },
     {
@@ -112,30 +122,34 @@ db.defaults({
         10: {
           id: "white",
           code: 10,
-          buttonClass: "btn-default",
+          buttonClass: "btn-light",
           buttonText: "White",
-          active: false
+          active: false,
+          status: "ready"
         },
         20: {
           id: "red",
           code: 20,
           buttonClass: "btn-danger",
           buttonText: "Red",
-          active: false
+          active: false,
+          status: "ready"
         },
         30: {
           id: "blue",
           code: 30,
           buttonClass: "btn-primary",
           buttonText: "Blue",
-          active: false
+          active: false,
+          status: "ready"
         },
         40: {
           id: "yellow",
           code: 40,
           buttonClass: "btn-warning",
           buttonText: "Yellow",
-          active: false
+          active: false,
+          status: "ready"
         }
       },
       optionButtons: []
